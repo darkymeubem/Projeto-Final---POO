@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulário de Usuário</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS específico para o formulário de usuário -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form_usuario.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center my-4">Adicionar Usuário</h2>
+  
+        <form class="c-form" action="{{ url_for('admin.inserir_usuario') }}" method="POST"
+        c-append="#lista-usuarios">
+            <div class="mb-3">
+                <label class="form-label font-weight-bold">Nome</label>
+                <input type="text" class="form-control" id="username" name="nome" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label font-weight-bold">Senha</label>
+                <input type="password" class="form-control" id="password" name="senha" required>
+            </div>
+            <button type="submit" class="btn btn-primary font-weight-bold">Adicionar</button>
+ 
+        </form>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript específico para o formulário
+    <script src="{{ url_for('static', filename='js/form_usuario.js') }}"></script> -->
+</body>
+</html>

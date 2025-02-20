@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Página do Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- CSS global -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  </head>
+  <body>
+    
+    <div class="container">
+      <h1 class="text-center">Gestão de Usuarios</h1>
+  
+      <!-- Formulário add Usuario -->
+      <div c-container="{{ url_for('admin.form_usuario') }}"></div>
+      
+      <hr>
+
+      <!-- Lista de clientes -->
+      <div c-container="{{ url_for('admin.lista_usuarios') }}"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <script src="{{ url_for('static', filename='js/cru.js') }}"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          var socket = io.connect('http://' + document.domain + ':' + location.port);
+          socket.on('connect', function() {
+              console.log('WebSocket connected!');
+          });
+
+          socket.on('response', function(data) {
+              console.log(data.message);
+          });
+
+          document.querySelectorAll('button[c-delete]').forEach(button => {
+              button.addEventListener('click', function() {
+                  const userId = this.getAttribute('data-id');
+                  const deleteUrl = this.getAttribute('c-delete');
+                  if (confirm("Tem certeza que deseja deletar este usuário?")) {
+                      fetch(deleteUrl, {
+                          method: 'DELETE',
+                      })
+                      .then(response => {
+                          if (response.ok) {
+                              // Remove a linha da tabela
+                              this.closest('tr').remove();
+                              // Reindexa os IDs das linhas restantes
+                              reindexarUsuarios();
+                          } else {
+                              alert("Erro ao deletar o usuário.");
+                          }
+                      })
+                      .catch(error => {
+                          console.error("Erro ao deletar o usuário:", error);
+                          alert("Erro ao deletar o usuário.");
+                      });
+                  }
+              });
+          });
+      });
+
+      function reindexarUsuarios() {
+          const rows = document.querySelectorAll('tr[id^="user-"]');
+          rows.forEach((row, index) => {
+              const userIdCell = row.querySelector('td:first-child');
+              userIdCell.textContent = index + 1;
+              row.id = `user-${index + 1}`;
+              const deleteButton = row.querySelector('.btn-deletar');
+              deleteButton.setAttribute('data-id', index + 1);
+              deleteButton.setAttribute('c-delete', `/admin/${index + 1}/delete`);
+          });
+      }
+    </script>
+  </body>
+</html>

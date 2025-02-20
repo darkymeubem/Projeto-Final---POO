@@ -1,0 +1,14 @@
+   <tr>
+        <td>{{ user.id }} </th>
+        <td>{{ user.username }}</td>
+        <td>{{ user.password }}</td>
+        <td>
+            <div class="btn-container">
+              <button class="btn btn-primary btn-editar" data-id="{{ user.id }}">Editar</button>
+               <button class="btn btn-danger btn-deletar"  
+               c-delete ="{{ url_for('admin.deletar_usuario', user_id=user.id) }}"
+               c-remove-closest="tr">Deletar</button>
+           
+            </div>
+        </td>
+</tr>

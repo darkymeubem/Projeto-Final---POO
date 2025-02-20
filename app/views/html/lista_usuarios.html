@@ -1,0 +1,38 @@
+<!-- filepath: /home/felipe-pedroza/Documentos/Felipe/python/projeto_final-OO/bmvc_start_from_this-main/app/views/html/lista_usuarios.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Usuários</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS específico para a lista de usuários -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lista_usuarios.css') }}">
+</head>
+<body>
+    <div class="container lista-usuarios-container">
+        <h2 class="text-center my-4">Lista de Usuários</h2>
+        <table class="table table-striped table-bordered lista-usuarios-table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nome de Usuário</th>
+                    <th>Senha</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id = "lista-usuarios">
+                {% for user in users %}
+                    {%include 'item_usuario.html'%}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- JavaScript específico para a lista de usuários -->
+    <script src="{{ url_for('static', filename='js/lista_usuarios.js') }}"></script>
+ 
+</body>
+</html>

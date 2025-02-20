@@ -1,0 +1,71 @@
+/* app/static/css/styles.css */
+
+/* Estilos globais */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradiente roxo para azul */
+    color: #fff; /* Cor do texto */
+    min-height: 100vh; /* Garante que o gradiente cubra toda a tela */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Container principal */
+.container {
+    background: rgba(255, 255, 255, 0.1); /* Fundo semi-transparente */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    max-width: 800px;
+    width: 100%;
+}
+
+/* Estilos para botões */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary {
+    background: #2575fc; /* Azul */
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #1a5bbf; /* Azul mais escuro */
+    transform: scale(1.05);
+}
+
+.btn-danger {
+    background: #ff4b5c; /* Vermelho */
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background: #e43a4a; /* Vermelho mais escuro */
+    transform: scale(1.05);
+}
+
+/* Estilos para links */
+a {
+    color: #2575fc; /* Azul */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para títulos */
+h1, h2, h3 {
+    color: #fff;
+    text-align: center;
+}
