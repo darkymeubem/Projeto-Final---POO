@@ -6,85 +6,42 @@
     <title>Catálogo de Cursos</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* Estilos personalizados */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #ddd;
-        }
-        .user-greeting {
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .catalog {
-            margin: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .btn-home {
-            margin-left: 10px;
-        }
-    </style>
+    <!-- CSS específico para a página -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pagina.css') }}">
 </head>
 <body>
-    <!-- Cabeçalho com nome do usuário e botão Home -->
-    <div class="header">
-        <h1>Catálogo de Cursos</h1>
-        <div>
-            <span class="user-greeting">Olá, {{ user.username }}!</span>
-            <a href="{{ url_for('auth.login') }}" class="btn btn-secondary btn-home">Home</a>
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center my-4">
+            <h1>Catálogo de Cursos</h1>
+            <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Home</a>
         </div>
-    </div>
-
-    <!-- Tabela de cursos -->
-    <div class="catalog">
-        <table>
+        <table class="table">
             <thead>
                 <tr>
-                    <th>Curso</th>
+                    <th>ID</th>
+                    <th>Nome do Curso</th>
                     <th>Descrição</th>
-                    <th>Duração</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
+                    <td>1</td>
                     <td>Introdução à Programação</td>
-                    <td>Aprenda os conceitos básicos de programação.</td>
-                    <td>20 horas</td>
+                    <td>Curso básico de programação para iniciantes.</td>
                 </tr>
                 <tr>
+                    <td>2</td>
                     <td>Desenvolvimento Web</td>
-                    <td>Curso completo sobre HTML, CSS e JavaScript.</td>
-                    <td>40 horas</td>
+                    <td>Curso sobre desenvolvimento de sites e aplicações web.</td>
                 </tr>
                 <tr>
-                    <td>Ciência de Dados</td>
-                    <td>Introdução à análise de dados com Python.</td>
-                    <td>30 horas</td>
-                </tr>
-                <tr>
-                    <td>Machine Learning</td>
-                    <td>Fundamentos de aprendizado de máquina.</td>
-                    <td>50 horas</td>
+                    <td>3</td>
+                    <td>Data Science</td>
+                    <td>Curso sobre ciência de dados e análise de dados.</td>
                 </tr>
             </tbody>
         </table>
     </div>
-
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
