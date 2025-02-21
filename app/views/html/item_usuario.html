@@ -1,10 +1,24 @@
-   <tr>
+   <tr id="user-{{user.id}}">
         <td>{{ user.id }} </th>
         <td>{{ user.username }}</td>
         <td>{{ user.password }}</td>
         <td>
             <div class="btn-container">
-              <button class="btn btn-primary btn-editar" data-id="{{ user.id }}">Editar</button>
+              <button class="btn btn-secondary" 
+              data-id="{{ user.id }}"
+              c-get ="{{ url_for('admin.detalhe_usuario', user_id=user.id) }}"
+              c-target = "#exibir-user"
+              data-bs-toggle="modal" data-bs-target="#exampleModal">
+                   Ver
+              </button>
+
+              <button class="btn btn-primary btn-editar" 
+              data-id="{{ user.id }}"
+              c-get ="{{ url_for('admin.form_edit_usuario', user_id=user.id) }}"
+              c-target = "#formulario">Editar</button>
+
+
+
                <button class="btn btn-danger btn-deletar"  
                c-delete ="{{ url_for('admin.deletar_usuario', user_id=user.id) }}"
                c-remove-closest="tr">Deletar</button>

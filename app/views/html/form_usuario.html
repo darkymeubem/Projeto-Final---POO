@@ -11,18 +11,33 @@
     <div class="container">
         <h2 class="text-center my-4">Adicionar Usuário</h2>
   
-        <form class="c-form" action="{{ url_for('admin.inserir_usuario') }}" method="POST"
-        c-append="#lista-usuarios">
-            <div class="mb-3">
+        <form class="c-form" 
+        
+        {% if user %}
+            action="{{ url_for('admin.atualizar_usuario', user_id=user.id) }}" 
+        {% else %}
+            action="{{ url_for('admin.inserir_usuario') }}" 
+        {% endif %}
+
+        method="{% if user %}PUT{% else %}POST{% endif %}"
+
+        {% if user %}
+            c-swap="#user-{{user.id}}"
+        {% else %}
+            c-append="#lista-usuarios"
+        {% endif %}
+
+        c-reload-container="true">
+             <div class="mb-3">
                 <label class="form-label font-weight-bold">Nome</label>
-                <input type="text" class="form-control" id="username" name="nome" required>
+                <input type="text" class="form-control" id="username" name="nome" required {% if user %} value="{{user.nome}}" {% endif %}>
             </div>
             <div class="mb-3">
                 <label class="form-label font-weight-bold">Senha</label>
-                <input type="password" class="form-control" id="password" name="senha" required>
+                <input type="password" class="form-control" id="password" name="senha" required{% if user %} value="{{user.senha}}" {% endif %}>
             </div>
-            <button type="submit" class="btn btn-primary font-weight-bold">Adicionar</button>
- 
+            <button type="submit" class="btn btn-primary font-weight-bold"> {% if user %}Salvar{% else %}Criar{% endif %}</button>
+       
         </form>
     </div>
     <!-- Bootstrap JS and dependencies -->
@@ -30,7 +45,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <!-- JavaScript específico para o formulário
-    <script src="{{ url_for('static', filename='js/form_usuario.js') }}"></script> -->
+    
 </body>
 </html>

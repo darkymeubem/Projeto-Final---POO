@@ -65,3 +65,41 @@ def deletar_usuario(user_id):
         user['id'] = index + 1
     
     return '', 204
+
+
+@admin_bp.route('/<int:user_id>')
+def detalhe_usuario(user_id):
+    """ exibir detalhes do cliente """
+    
+    user = list(filter(lambda u: u['id'] == user_id, users))[0]
+    return render_template('detalhe_usuario.html', user=user)
+    
+
+@admin_bp.route('/<int:user_id>/edit')
+def form_edit_usuario(user_id):
+    """ formulario para editar um user """
+    user = None 
+    for u in users:
+        if u["id"] == user_id:
+            user = u
+    
+    return render_template('form_usuario.html', user=user)
+
+@admin_bp.route('/<int:user_id>/update', methods=['PUT'])
+def atualizar_usuario(user_id):
+    """ atualizar informacoes do cliente """
+    user_editado = None
+    # obter dados do formulario de edicao
+    data = request.json
+    
+    # obter usuario pelo id
+    for u in users:
+        if u['id'] == user_id:
+            u['username'] = data['nome']
+            u['password'] = data['senha']
+            
+            user_editado = u
+            
+    # editar usuario
+    return render_template('item_usuario.html', user=user_editado)
+    

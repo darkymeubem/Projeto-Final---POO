@@ -21,6 +21,15 @@ class UserAccount:
             "password": self.password
         }
 
+
+    @staticmethod
+    def get_by_id(user_id):
+        # Simulação de busca por ID (substitua pela lógica real)
+        for user in users:
+            if user['id'] == user_id:
+                return UserAccount(user['id'], user['username'], user['password'])
+        return None
+    
     def save(self):
         user_data = self.serialize()
         add_user(user_data)
